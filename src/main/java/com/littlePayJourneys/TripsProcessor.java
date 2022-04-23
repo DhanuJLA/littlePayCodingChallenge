@@ -8,13 +8,9 @@ import java.util.stream.Collectors;
 
 public class TripsProcessor {
 
-    public static final double stop1ToStop2 = 3.25;
-    public static final double stop1ToStop3 = 7.30;
-    public static final double stop2ToStop3 = 5.50;
-
-    public static List<Trips> processTripsFromTaps( Map<LocalDate, List<Taps>> listOfTapsByDate){
-        List <Trips>  processedTrips = new ArrayList<>();
-        listOfTapsByDate.forEach((k,v) -> processedTrips.addAll(processTripsPerDay(v)));
+    public static List<Trips> processTripsFromTaps(Map<LocalDate, List<Taps>> listOfTapsByDate) {
+        List<Trips> processedTrips = new ArrayList<>();
+        listOfTapsByDate.forEach((k, v) -> processedTrips.addAll(processTripsPerDay(v)));
         return processedTrips;
     }
 
@@ -52,7 +48,6 @@ public class TripsProcessor {
             if (tapOnItemIndex < tapOffsListPerPan.size()) {
                 tapOffItem = tapOffsListPerPan.get(tapOnItemIndex);
             }
-
             //construct trips
             Trips trip = new Trips(tapOnItem, tapOffItem);
             tripsListPerPan.add(trip);
