@@ -1,6 +1,8 @@
 package com.littlePayJourneys;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -23,18 +25,23 @@ public class CSVProcessor {
                 .sorted(Comparator.comparing(Taps::getDateTimeUtc))
                 .collect(Collectors.groupingBy(Taps::getDate));
 
-       /* Map<String, List<Taps>> listOfTapsByPan = Files.lines(path)
-                .skip(1)
-                .map(CSVReader::getTaps)
-                .sorted(Comparator.comparing(Taps::getDateTimeUtc))
-                .collect(Collectors.groupingBy(Taps::getPan));*/
-
         return listOfTapsGroupedByDate;
     }
 
     public static void writeTripsCsv(List <Trips>  processedTrips){
 
+        try{
+            File tripsCsvFile = new File("trips.csv");
+            PrintWriter out = new PrintWriter(tripsCsvFile);
+            out.println("Started, Finished, DurationSecs, FromStopId, ToStopId, ChargeAmount, CompanyId, BusID, PAN, Status");
+            for(Trips trip: processedTrips){
+                out.println(trip);
+            }
+            out.close();
 
+        } catch(Exception e){
+
+        }
     }
 
     private static Taps getTaps(String line) {

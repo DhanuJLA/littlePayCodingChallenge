@@ -1,11 +1,12 @@
 package com.littlePayJourneys;
 
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Trips {
-    private LocalDateTime started;
-    private  LocalDateTime finished;
+    private Timestamp started;
+    private  Timestamp finished;
     private  Long durationSecs;
     private  String fromStopId;
     private  String toStopId;
@@ -16,7 +17,7 @@ public class Trips {
     private  String status;
 
 
-    public Trips(LocalDateTime started, LocalDateTime finished, Long durationSecs, String fromStopId, String toStopId, Double chargeAmount, String companyId, String busId, String pan, String status) {
+    public Trips(Timestamp started, Timestamp finished, Long durationSecs, String fromStopId, String toStopId, Double chargeAmount, String companyId, String busId, String pan, String status) {
         this.started = started;
         this.finished = finished;
         this.durationSecs = durationSecs;
@@ -30,8 +31,8 @@ public class Trips {
     }
 
     public Trips(Taps tapOn, Taps tapOff){
-        this.started = tapOn.getDateTimeUtc();
-        this.finished = tapOff.getDateTimeUtc();
+        this.started = tapOn.getDateTimeUtc() != null ? Timestamp.valueOf(tapOn.getDateTimeUtc()) : null;
+        this.finished = tapOff.getDateTimeUtc() != null ? Timestamp.valueOf(tapOff.getDateTimeUtc()) : null;
         this.durationSecs = getTripDuration(tapOn, tapOff);
         this.fromStopId = tapOn.getStopId();
         this.toStopId = tapOff.getStopId();
@@ -104,11 +105,11 @@ public class Trips {
         return charge;
     }
 
-    public LocalDateTime getStarted() {
+    public Timestamp getStarted() {
         return started;
     }
 
-    public LocalDateTime getFinished() {
+    public Timestamp getFinished() {
         return finished;
     }
 
@@ -144,11 +145,11 @@ public class Trips {
         return status;
     }
 
-    public void setStarted(LocalDateTime started) {
+    public void setStarted(Timestamp started) {
         this.started = started;
     }
 
-    public void setFinished(LocalDateTime finished) {
+    public void setFinished(Timestamp finished) {
         this.finished = finished;
     }
 
@@ -186,17 +187,16 @@ public class Trips {
 
     @Override
     public String toString() {
-        return "Trips{" +
-                "started=" + started +
-                ", finished=" + finished +
-                ", durationSecs=" + durationSecs +
-                ", fromStopId='" + fromStopId + '\'' +
-                ", toStopId='" + toStopId + '\'' +
-                ", chargeAmount='" + chargeAmount + '\'' +
-                ", companyId='" + companyId + '\'' +
-                ", busId='" + busId + '\'' +
-                ", pan='" + pan + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+        return
+                 started +
+                ", " + finished +
+                ", " + durationSecs +
+                ", " + fromStopId  +
+                ", " + toStopId +
+                ", " + chargeAmount +
+                ", " + companyId +
+                ", " + busId +
+                ", " + pan +
+                ", " + status;
     }
 }

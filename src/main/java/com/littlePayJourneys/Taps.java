@@ -57,34 +57,6 @@ public class Taps {
         return pan;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setDateTimeUtc(LocalDateTime dateTimeUtc) {
-        this.dateTimeUtc = dateTimeUtc;
-    }
-
-    public void setTapType(String tapType) {
-        this.tapType = tapType;
-    }
-
-    public void setStopId(String stopId) {
-        this.stopId = stopId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
-    }
-
-    public void setBusId(String busId) {
-        this.busId = busId;
-    }
-
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
-
     @Override
     public String toString() {
         return "Taps{" +
