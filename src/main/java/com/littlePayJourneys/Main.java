@@ -13,6 +13,7 @@ public class Main {
 
         List <Trips>  processedTrips = TripsProcessor.processTripsFromTaps(listOfTapsByDate);
 
-        System.out.println(processedTrips);
+        CSVProcessor.writeTripsCsv(processedTrips);
+        //System.out.println(processedTrips);
     }
 }
