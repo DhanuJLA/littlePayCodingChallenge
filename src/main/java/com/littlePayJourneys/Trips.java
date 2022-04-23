@@ -28,6 +28,7 @@ public class Trips {
         this.status = getTripStatus(tapOn, tapOff);
     }
 
+    public Trips(){}
     public static Long getTripDuration(Taps tapOn, Taps tapOff) {
         Long duration = 0L;
         Boolean isIncompleteTrip = !tapOn.getPan().equalsIgnoreCase(tapOff.getPan());
@@ -60,6 +61,7 @@ public class Trips {
 
         Double charge = 0.0;
 
+        //Trip is incomplete if the tap off pan doesn't match tap on pan as this would be an empty tap off object
         Boolean isIncompleteTrip = !tapOn.getPan().equalsIgnoreCase(tapOff.getPan());
         Boolean isTripCancelled = tapOn.getStopId().equalsIgnoreCase(tapOff.getStopId());
 
