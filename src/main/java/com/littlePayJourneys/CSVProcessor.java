@@ -28,19 +28,18 @@ public class CSVProcessor {
         return listOfTapsGroupedByDate;
     }
 
-    public static void writeTripsCsv(List <Trips>  processedTrips){
-
-        try{
+    public static void writeTripsCsv(List<Trips> processedTrips) {
+        try {
             File tripsCsvFile = new File("trips.csv");
             PrintWriter out = new PrintWriter(tripsCsvFile);
             out.println("Started, Finished, DurationSecs, FromStopId, ToStopId, ChargeAmount, CompanyId, BusID, PAN, Status");
-            for(Trips trip: processedTrips){
+            for (Trips trip : processedTrips) {
                 out.println(trip);
             }
             out.close();
-
-        } catch(Exception e){
-
+            System.out.println("Trips written to file successfully!");
+        } catch (Exception e) {
+            System.out.println("Unable to write to the file.");
         }
     }
 
@@ -52,13 +51,7 @@ public class CSVProcessor {
     private static LocalDateTime formatToTimestamp(String dateTimeUtcString) {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return LocalDateTime.parse(dateTimeUtcString, formatDateTime);
-
-        /*DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime localDateTime =  LocalDateTime.from(formatDateTime.parse(dateTimeUtcString));
-        return Timestamp.valueOf(localDateTime);*/
-
     }
-
 
 
 }

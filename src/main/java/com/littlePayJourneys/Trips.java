@@ -2,35 +2,20 @@ package com.littlePayJourneys;
 
 import java.sql.Timestamp;
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 public class Trips {
     private Timestamp started;
-    private  Timestamp finished;
-    private  Long durationSecs;
-    private  String fromStopId;
-    private  String toStopId;
-    private  Double chargeAmount;
-    private  String companyId;
-    private  String busId;
-    private  String pan;
-    private  String status;
+    private Timestamp finished;
+    private Long durationSecs;
+    private String fromStopId;
+    private String toStopId;
+    private Double chargeAmount;
+    private String companyId;
+    private String busId;
+    private String pan;
+    private String status;
 
-
-    public Trips(Timestamp started, Timestamp finished, Long durationSecs, String fromStopId, String toStopId, Double chargeAmount, String companyId, String busId, String pan, String status) {
-        this.started = started;
-        this.finished = finished;
-        this.durationSecs = durationSecs;
-        this.fromStopId = fromStopId;
-        this.toStopId = toStopId;
-        this.chargeAmount = chargeAmount;
-        this.companyId = companyId;
-        this.busId = busId;
-        this.pan = pan;
-        this.status = status;
-    }
-
-    public Trips(Taps tapOn, Taps tapOff){
+    public Trips(Taps tapOn, Taps tapOff) {
         this.started = tapOn.getDateTimeUtc() != null ? Timestamp.valueOf(tapOn.getDateTimeUtc()) : null;
         this.finished = tapOff.getDateTimeUtc() != null ? Timestamp.valueOf(tapOff.getDateTimeUtc()) : null;
         this.durationSecs = getTripDuration(tapOn, tapOff);
@@ -43,36 +28,36 @@ public class Trips {
         this.status = getTripStatus(tapOn, tapOff);
     }
 
-    public Trips() {
-
-    }
-
-    public static Long getTripDuration(Taps tapOn, Taps tapOff){
-        Long duration  = 0L;
+    public static Long getTripDuration(Taps tapOn, Taps tapOff) {
+        Long duration = 0L;
         Boolean isIncompleteTrip = !tapOn.getPan().equalsIgnoreCase(tapOff.getPan());
 
-        if(Boolean.FALSE.equals(isIncompleteTrip)){
-          duration = Duration.between(tapOn.getDateTimeUtc(), tapOff.getDateTimeUtc()).getSeconds();
+        if (Boolean.FALSE.equals(isIncompleteTrip)) {
+            duration = Duration.between(tapOn.getDateTimeUtc(), tapOff.getDateTimeUtc()).getSeconds();
         }
         return duration;
     }
 
-    public static String getTripStatus(Taps tapOn, Taps tapOff){
+    public static String getTripStatus(Taps tapOn, Taps tapOff) {
         String status = "COMPLETED";
         Boolean isIncompleteTrip = !tapOn.getPan().equalsIgnoreCase(tapOff.getPan());
 
-        if(Boolean.TRUE.equals(isIncompleteTrip)){
+        if (Boolean.TRUE.equals(isIncompleteTrip)) {
             status = "INCOMPLETE";
         } else {
             Boolean isTripCancelled = tapOn.getStopId().equalsIgnoreCase(tapOff.getStopId());
-            if(Boolean.TRUE.equals(isTripCancelled)){
+            if (Boolean.TRUE.equals(isTripCancelled)) {
                 status = "CANCELLED";
             }
         }
         return status;
     }
 
-    public static Double getCharge(Taps tapOn, Taps tapOff){
+    public static Double getCharge(Taps tapOn, Taps tapOff) {
+        Double stop1ToStop2 = 3.25;
+        Double stop1ToStop3 = 7.30;
+        Double stop2ToStop3 = 5.50;
+
         Double charge = 0.0;
 
         Boolean isIncompleteTrip = !tapOn.getPan().equalsIgnoreCase(tapOff.getPan());
@@ -81,27 +66,26 @@ public class Trips {
         String fromStop = tapOn.getStopId();
         String toStop = tapOff.getStopId();
 
-        if(Boolean.FALSE.equals(isTripCancelled)){
-            if(Boolean.TRUE.equals(isIncompleteTrip)){
-                if((("Stop1").equalsIgnoreCase(fromStop) || ("Stop1").equalsIgnoreCase(toStop))){
-                    charge = Double.max(TripsProcessor.stop1ToStop2, TripsProcessor.stop1ToStop3);
-                } else if((("Stop2").equalsIgnoreCase(fromStop) || ("Stop2").equalsIgnoreCase(toStop))){
-                    charge = Double.max(TripsProcessor.stop1ToStop2, TripsProcessor.stop2ToStop3);
-                } else{
-                    charge = Double.max(TripsProcessor.stop1ToStop3, TripsProcessor.stop2ToStop3);
+        if (Boolean.FALSE.equals(isTripCancelled)) {
+            if (Boolean.TRUE.equals(isIncompleteTrip)) {
+                if ((("Stop1").equalsIgnoreCase(fromStop) || ("Stop1").equalsIgnoreCase(toStop))) {
+                    charge = Double.max(stop1ToStop2, stop1ToStop3);
+                } else if ((("Stop2").equalsIgnoreCase(fromStop) || ("Stop2").equalsIgnoreCase(toStop))) {
+                    charge = Double.max(stop1ToStop2, stop2ToStop3);
+                } else {
+                    charge = Double.max(stop1ToStop3, stop2ToStop3);
                 }
             } else {
-                if((("Stop1").equalsIgnoreCase(fromStop) || ("Stop2").equalsIgnoreCase(fromStop)) && (("Stop1").equalsIgnoreCase(toStop) || ("Stop2").equalsIgnoreCase(toStop))){
-                    charge = TripsProcessor.stop1ToStop2;
-                } else if((("Stop1").equalsIgnoreCase(fromStop) || ("Stop3").equalsIgnoreCase(fromStop)) && (("Stop1").equalsIgnoreCase(toStop) || ("Stop3").equalsIgnoreCase(toStop))){
-                    charge = TripsProcessor.stop1ToStop3;
-                } else if((("Stop2").equalsIgnoreCase(fromStop) || ("Stop3").equalsIgnoreCase(fromStop)) && (("Stop2").equalsIgnoreCase(toStop) || ("Stop3").equalsIgnoreCase(toStop))){
-                    charge = TripsProcessor.stop2ToStop3;
+                if ((("Stop1").equalsIgnoreCase(fromStop) || ("Stop2").equalsIgnoreCase(fromStop)) && (("Stop1").equalsIgnoreCase(toStop) || ("Stop2").equalsIgnoreCase(toStop))) {
+                    charge = stop1ToStop2;
+                } else if ((("Stop1").equalsIgnoreCase(fromStop) || ("Stop3").equalsIgnoreCase(fromStop)) && (("Stop1").equalsIgnoreCase(toStop) || ("Stop3").equalsIgnoreCase(toStop))) {
+                    charge = stop1ToStop3;
+                } else if ((("Stop2").equalsIgnoreCase(fromStop) || ("Stop3").equalsIgnoreCase(fromStop)) && (("Stop2").equalsIgnoreCase(toStop) || ("Stop3").equalsIgnoreCase(toStop))) {
+                    charge = stop2ToStop3;
                 }
             }
 
         }
-
         return charge;
     }
 
@@ -188,15 +172,15 @@ public class Trips {
     @Override
     public String toString() {
         return
-                 started +
-                ", " + finished +
-                ", " + durationSecs +
-                ", " + fromStopId  +
-                ", " + toStopId +
-                ", " + chargeAmount +
-                ", " + companyId +
-                ", " + busId +
-                ", " + pan +
-                ", " + status;
+                started +
+                        ", " + finished +
+                        ", " + durationSecs +
+                        ", " + fromStopId +
+                        ", " + toStopId +
+                        ", " + chargeAmount +
+                        ", " + companyId +
+                        ", " + busId +
+                        ", " + pan +
+                        ", " + status;
     }
 }

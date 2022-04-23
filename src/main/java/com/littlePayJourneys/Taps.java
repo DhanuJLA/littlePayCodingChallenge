@@ -33,7 +33,7 @@ public class Taps {
         return dateTimeUtc;
     }
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return this.dateTimeUtc.toLocalDate();
     }
 
