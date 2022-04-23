@@ -14,7 +14,5 @@ public class Main {
         List <Trips>  processedTrips = TripsProcessor.processTripsFromTaps(listOfTapsByDate);
 
         System.out.println(processedTrips);
-
-        System.out.println("test");
     }
 }
