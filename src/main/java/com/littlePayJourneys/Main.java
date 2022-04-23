@@ -9,11 +9,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Map<LocalDate, List<Taps>> listOfTapsByDate =  CSVProcessor.readTapsByDate();
+        Map<LocalDate, List<Taps>> listOfTapsByDate = CSVProcessor.readTapsByDate();
 
-        List <Trips>  processedTrips = TripsProcessor.processTripsFromTaps(listOfTapsByDate);
+        List<Trips> processedTrips = TripsProcessor.processTripsFromTaps(listOfTapsByDate);
 
         CSVProcessor.writeTripsCsv(processedTrips);
-        //System.out.println(processedTrips);
     }
 }
