@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class TripsTest {
     Taps tapOnComplete;
     Taps tapOffComplete;

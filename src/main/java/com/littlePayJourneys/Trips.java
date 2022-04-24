@@ -2,6 +2,7 @@ package com.littlePayJourneys;
 
 import java.sql.Timestamp;
 import java.time.Duration;
+import java.util.Objects;
 
 public class Trips {
     private Timestamp started;
@@ -169,6 +170,19 @@ public class Trips {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Trips trips = (Trips) o;
+        return Objects.equals(started, trips.started) && Objects.equals(finished, trips.finished) && Objects.equals(durationSecs, trips.durationSecs) && Objects.equals(fromStopId, trips.fromStopId) && Objects.equals(toStopId, trips.toStopId) && Objects.equals(chargeAmount, trips.chargeAmount) && Objects.equals(companyId, trips.companyId) && Objects.equals(busId, trips.busId) && Objects.equals(pan, trips.pan) && Objects.equals(status, trips.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(started, finished, durationSecs, fromStopId, toStopId, chargeAmount, companyId, busId, pan, status);
     }
 
     @Override
