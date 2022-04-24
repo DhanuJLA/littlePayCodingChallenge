@@ -10,14 +10,14 @@ public class TripsProcessor {
 
     public static List<Trips> processTripsFromTaps(Map<LocalDate, List<Taps>> listOfTapsByDate) {
         List<Trips> processedTrips = new ArrayList<>();
-        //Process trips grouped by day
-        listOfTapsByDate.forEach((k, v) -> processedTrips.addAll(processTripsPerDayTest(v)));
+        //Process trips from taps for each day
+        listOfTapsByDate.forEach((k, v) -> processedTrips.addAll(processTripsPerDay(v)));
         return processedTrips;
     }
 
-    public static List<Trips> processTripsPerDayTest(List<Taps> tapsPerDay){
+    public static List<Trips> processTripsPerDay(List<Taps> tapsPerDay) {
 
-        List<Trips> tripsListPerDay= new ArrayList<>();
+        List<Trips> tripsListPerDay = new ArrayList<>();
 
         List<Taps> tapOffsList = tapsPerDay
                 .stream()
@@ -29,7 +29,7 @@ public class TripsProcessor {
                 .filter(tapItem -> ("ON").equalsIgnoreCase(tapItem.getTapType()))
                 .collect(Collectors.toList());
 
-        for(Taps tapOn: tapOnsList){
+        for (Taps tapOn : tapOnsList) {
             //Find matching corresponding tap off for PAN and BusId
             Taps tapOff = tapOffsList
                     .stream()
@@ -38,7 +38,7 @@ public class TripsProcessor {
                     .orElse(new Taps());
 
             //remove tapOff that was matched from list
-            if(tapOn.getPan().equalsIgnoreCase(tapOff.getPan())){
+            if (tapOn.getPan().equalsIgnoreCase(tapOff.getPan())) {
                 tapOffsList.remove(tapOff);
             }
             Trips trip = new Trips(tapOn, tapOff);
