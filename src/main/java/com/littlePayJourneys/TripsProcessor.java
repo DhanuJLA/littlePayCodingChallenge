@@ -33,7 +33,7 @@ public class TripsProcessor {
             //Find matching corresponding tap off for PAN and BusId
             Taps tapOff = tapOffsList
                     .stream()
-                    .filter(tapitem -> tapOn.getPan().equalsIgnoreCase(tapitem.getPan()) && tapOn.getBusId().equalsIgnoreCase(tapitem.getBusId()))
+                    .filter(tapItem -> tapOn.getPan().equalsIgnoreCase(tapItem.getPan()) && tapOn.getBusId().equalsIgnoreCase(tapItem.getBusId()))
                     .findFirst()
                     .orElse(new Taps());
 
