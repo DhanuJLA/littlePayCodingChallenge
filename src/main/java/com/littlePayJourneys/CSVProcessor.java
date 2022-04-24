@@ -19,6 +19,7 @@ public class CSVProcessor {
 
         Path path = Path.of("src", "main", "resources", "taps.csv");
 
+        //Taps read from file, sorted by date time and grouped by date
         Map<LocalDate, List<Taps>> listOfTapsGroupedByDate = Files.lines(path)
                 .skip(1)
                 .map(CSVProcessor::getTaps)
