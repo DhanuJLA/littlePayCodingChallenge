@@ -26,7 +26,7 @@ public class TripsTest {
 
         completedTrip = new CompletedTrips(tapOnComplete, tapOffComplete);
         incompleteTrip = new IncompleteTrips(tapOnComplete, tapOffIncomplete);
-        cancelledTrip =  new CancelledTrips(tapOnComplete, tapOffCancelled);
+        cancelledTrip = new CancelledTrips(tapOnComplete, tapOffCancelled);
     }
 
 
@@ -35,6 +35,7 @@ public class TripsTest {
         Long duration = completedTrip.getDurationSecs();
         assertEquals(1200, duration);
     }
+
     @Test
     void itShouldGetDurationForIncompleteTrip() {
         Long duration = incompleteTrip.getDurationSecs();
@@ -141,7 +142,7 @@ public class TripsTest {
     void itShouldGetChargeForIncompleteTripWithStop2() {
         tapOnComplete.setStopId("Stop2");
         Trips incompleteTripStop2 = new IncompleteTrips(tapOnComplete, tapOffIncomplete);
-        Double charge =  incompleteTripStop2.getChargeAmount();
+        Double charge = incompleteTripStop2.getChargeAmount();
         assertEquals(5.50, charge);
     }
 
@@ -149,7 +150,7 @@ public class TripsTest {
     void itShouldGetChargeForIncompleteTripWitStop3() {
         tapOnComplete.setStopId("Stop3");
         Trips incompleteTripStop3 = new IncompleteTrips(tapOnComplete, tapOffIncomplete);
-        Double charge =  incompleteTripStop3.getChargeAmount();
+        Double charge = incompleteTripStop3.getChargeAmount();
         assertEquals(7.30, charge);
     }
 

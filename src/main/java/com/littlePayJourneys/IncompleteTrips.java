@@ -2,7 +2,7 @@ package com.littlePayJourneys;
 
 import java.util.Objects;
 
-public class IncompleteTrips extends AllTrips{
+public class IncompleteTrips extends AllTrips {
     private Long durationSecs;
     private String status;
 
@@ -22,20 +22,20 @@ public class IncompleteTrips extends AllTrips{
         return "INCOMPLETE";
     }
 
-   @Override
-   public String toString() {
-       return
-               super.getStarted() +
-                       ", " + super.getFinished() +
-                       ", " + durationSecs +
-                       ", " + super.getFromStopId() +
-                       ", " + super.getToStopId() +
-                       ", " + super.getChargeAmount() +
-                       ", " + super.getCompanyId() +
-                       ", " + super.getBusId() +
-                       ", " + super.getPan() +
-                       ", " + status;
-   }
+    @Override
+    public String toString() {
+        return
+                super.getStarted() +
+                        ", " + super.getFinished() +
+                        ", " + durationSecs +
+                        ", " + super.getFromStopId() +
+                        ", " + super.getToStopId() +
+                        ", " + super.getChargeAmount() +
+                        ", " + super.getCompanyId() +
+                        ", " + super.getBusId() +
+                        ", " + super.getPan() +
+                        ", " + status;
+    }
 
     @Override
     public String getStatus() {
