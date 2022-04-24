@@ -37,7 +37,7 @@ public class TripsProcessor {
                     .findFirst()
                     .orElse(new Taps());
 
-            //remove tapOff that was matched from list
+            //Remove tapOff that was matched from list
             if (tapOn.getPan().equalsIgnoreCase(tapOff.getPan())) {
                 tapOffsList.remove(tapOff);
             }
