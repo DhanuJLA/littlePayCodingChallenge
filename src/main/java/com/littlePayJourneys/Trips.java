@@ -30,7 +30,8 @@ public class Trips {
     }
 
     public Trips(){}
-    public static Long getTripDuration(Taps tapOn, Taps tapOff) {
+
+     public static Long getTripDuration(Taps tapOn, Taps tapOff) {
         Long duration = 0L;
         Boolean isIncompleteTrip = !tapOn.getPan().equalsIgnoreCase(tapOff.getPan());
 
@@ -64,6 +65,8 @@ public class Trips {
 
         //Trip is incomplete if the tap off pan doesn't match tap on pan as this would be an empty tap off object
         Boolean isIncompleteTrip = !tapOn.getPan().equalsIgnoreCase(tapOff.getPan());
+
+        //Trips is considered cancelled if both tap on and tap off was at the same stop
         Boolean isTripCancelled = tapOn.getStopId().equalsIgnoreCase(tapOff.getStopId());
 
         String fromStop = tapOn.getStopId();
@@ -90,86 +93,6 @@ public class Trips {
 
         }
         return charge;
-    }
-
-    public Timestamp getStarted() {
-        return started;
-    }
-
-    public Timestamp getFinished() {
-        return finished;
-    }
-
-    public Long getDurationSecs() {
-        return durationSecs;
-    }
-
-    public String getFromStopId() {
-        return fromStopId;
-    }
-
-    public String getToStopId() {
-        return toStopId;
-    }
-
-    public Double getChargeAmount() {
-        return chargeAmount;
-    }
-
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public String getBusId() {
-        return busId;
-    }
-
-    public String getPan() {
-        return pan;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStarted(Timestamp started) {
-        this.started = started;
-    }
-
-    public void setFinished(Timestamp finished) {
-        this.finished = finished;
-    }
-
-    public void setDurationSecs(Long durationSecs) {
-        this.durationSecs = durationSecs;
-    }
-
-    public void setFromStopId(String fromStopId) {
-        this.fromStopId = fromStopId;
-    }
-
-    public void setToStopId(String toStopId) {
-        this.toStopId = toStopId;
-    }
-
-    public void setChargeAmount(Double chargeAmount) {
-        this.chargeAmount = chargeAmount;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
-    }
-
-    public void setBusId(String busId) {
-        this.busId = busId;
-    }
-
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     @Override
