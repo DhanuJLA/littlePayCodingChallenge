@@ -46,10 +46,10 @@ public class CSVProcessor {
 
     private static Taps getTaps(String line) {
         String[] fields = line.split(",");
-        return new Taps(Integer.parseInt(fields[0]), formatToTimestamp(fields[1]), fields[2], fields[3], fields[4], fields[5], fields[6]);
+        return new Taps(Integer.parseInt(fields[0]), formatToLocalDateTime(fields[1]), fields[2], fields[3], fields[4], fields[5], fields[6]);
     }
 
-    private static LocalDateTime formatToTimestamp(String dateTimeUtcString) {
+    private static LocalDateTime formatToLocalDateTime(String dateTimeUtcString) {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return LocalDateTime.parse(dateTimeUtcString, formatDateTime);
     }
