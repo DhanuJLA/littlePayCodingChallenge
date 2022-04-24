@@ -40,9 +40,9 @@ public class TripsProcessor {
             Trips trip;
 
             if (tapOn.getPan().equalsIgnoreCase(tapOff.getPan())) {
-                if(tapOn.getStopId().equalsIgnoreCase(tapOff.getStopId())){
+                if (tapOn.getStopId().equalsIgnoreCase(tapOff.getStopId())) {
                     //Cancelled trip
-                   trip = new CancelledTrips(tapOn, tapOff);
+                    trip = new CancelledTrips(tapOn, tapOff);
                 } else {
                     //Completed trip
                     trip = new CompletedTrips(tapOn, tapOff);

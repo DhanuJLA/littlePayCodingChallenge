@@ -2,7 +2,7 @@ package com.littlePayJourneys;
 
 import java.util.Objects;
 
-public class CompletedTrips extends AllTrips{
+public class CompletedTrips extends AllTrips {
     private String status;
 
     public CompletedTrips(Taps tapOn, Taps tapOff) {
@@ -11,7 +11,7 @@ public class CompletedTrips extends AllTrips{
     }
 
     @Override
-    public String assignTripStatus(){
+    public String assignTripStatus() {
         return "COMPLETED";
     }
 
