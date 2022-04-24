@@ -37,11 +37,23 @@ public class TripsProcessor {
                     .findFirst()
                     .orElse(new Taps());
 
-            //Remove tapOff that was matched from list
+            Trips trip;
+
             if (tapOn.getPan().equalsIgnoreCase(tapOff.getPan())) {
+                if(tapOn.getStopId().equalsIgnoreCase(tapOff.getStopId())){
+                    //Cancelled trip
+                   trip = new CancelledTrips(tapOn, tapOff);
+                } else {
+                    //Completed trip
+                    trip = new CompletedTrips(tapOn, tapOff);
+                }
+                //Remove matched tapOff from list
                 tapOffsList.remove(tapOff);
+            } else {
+                //Incomplete trip
+                trip = new IncompleteTrips(tapOn, tapOff);
             }
-            Trips trip = new Trips(tapOn, tapOff);
+
             tripsListPerDay.add(trip);
         }
         return tripsListPerDay;

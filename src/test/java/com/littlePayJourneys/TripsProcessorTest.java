@@ -34,8 +34,8 @@ class TripsProcessorTest {
         tapsDayOne.add(tap1OffDay1);
         tapsDayOne.add(tap2OnDay1);
 
-        expectedTripsDayOne.add(new Trips(tap1OnDay1, tap1OffDay1));
-        expectedTripsDayOne.add(new Trips(tap2OnDay1, new Taps()));
+        expectedTripsDayOne.add(new CompletedTrips(tap1OnDay1, tap1OffDay1));
+        expectedTripsDayOne.add(new IncompleteTrips(tap2OnDay1, new Taps()));
 
         //Cancelled trip day 2
         Taps tap2OnDay2 = new Taps(300, LocalDateTime.of(2018, 8, 21, 6, 30), "ON", "Stop1", "Company2", "Bus37", "533500200400");
@@ -43,15 +43,15 @@ class TripsProcessorTest {
 
         //Completed trip day 2
         Taps tap3OnDay2 = new Taps(300, LocalDateTime.of(2018, 8, 21, 8, 30), "ON", "Stop1", "Company2", "Bus38", "877500200400");
-        Taps tap3OffDay2 = new Taps(300, LocalDateTime.of(2018, 8, 21, 8, 40), "OFF", "Stop1", "Company2", "Bus38", "877500200400");
+        Taps tap3OffDay2 = new Taps(300, LocalDateTime.of(2018, 8, 21, 8, 40), "OFF", "Stop3", "Company2", "Bus38", "877500200400");
 
         tapsDayTwo.add(tap2OnDay2);
         tapsDayTwo.add(tap2OffDay2);
         tapsDayTwo.add(tap3OnDay2);
         tapsDayTwo.add(tap3OffDay2);
 
-        expectedTripsDayTwo.add(new Trips(tap2OnDay2, tap2OffDay2));
-        expectedTripsDayTwo.add(new Trips(tap3OnDay2, tap3OffDay2));
+        expectedTripsDayTwo.add(new CancelledTrips(tap2OnDay2, tap2OffDay2));
+        expectedTripsDayTwo.add(new CompletedTrips(tap3OnDay2, tap3OffDay2));
 
     }
 
