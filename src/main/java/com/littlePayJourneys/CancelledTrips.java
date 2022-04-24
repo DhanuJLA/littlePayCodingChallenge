@@ -9,23 +9,23 @@ public class CancelledTrips extends AllTrips {
 
     public CancelledTrips(Taps tapOn, Taps tapOff) {
         super(tapOn, tapOff);
-        this.durationSecs = getTripDuration(tapOn, tapOff);
-        this.chargeAmount = getCharge(tapOn, tapOff);
-        this.status = getTripStatus();
+        this.durationSecs = calculateTripDuration(tapOn, tapOff);
+        this.chargeAmount = this.calculateCharge(tapOn, tapOff);
+        this.status = assignTripStatus();
     }
 
     @Override
-    public Long getTripDuration(Taps tapOn, Taps tapOff) {
+    public Long calculateTripDuration(Taps tapOn, Taps tapOff) {
         return 0L;
     }
 
     @Override
-    public String getTripStatus() {
+    public String assignTripStatus() {
         return "CANCELLED";
     }
 
     @Override
-    public Double getCharge(Taps tapOn, Taps tapOff) {
+    public Double calculateCharge(Taps tapOn, Taps tapOff) {
         return 0.0;
     }
 
@@ -44,10 +44,6 @@ public class CancelledTrips extends AllTrips {
                         ", " + status;
     }
 
-    @Override
-    public Long getDurationSecs() {
-        return durationSecs;
-    }
 
     @Override
     public Double getChargeAmount() {

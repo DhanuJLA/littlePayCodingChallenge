@@ -8,17 +8,17 @@ public class IncompleteTrips extends AllTrips{
 
     public IncompleteTrips(Taps tapOn, Taps tapOff) {
         super(tapOn, tapOff);
-        this.durationSecs = getTripDuration(tapOn, tapOff);
-        this.status = getTripStatus();
+        this.durationSecs = calculateTripDuration(tapOn, tapOff);
+        this.status = assignTripStatus();
     }
 
     @Override
-    public Long getTripDuration(Taps tapOn, Taps tapOff) {
+    public Long calculateTripDuration(Taps tapOn, Taps tapOff) {
         return 0L;
     }
 
     @Override
-    public String getTripStatus() {
+    public String assignTripStatus() {
         return "INCOMPLETE";
     }
 
@@ -36,11 +36,6 @@ public class IncompleteTrips extends AllTrips{
                        ", " + super.getPan() +
                        ", " + status;
    }
-
-    @Override
-    public Long getDurationSecs() {
-        return durationSecs;
-    }
 
     @Override
     public String getStatus() {

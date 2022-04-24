@@ -2,11 +2,11 @@ package com.littlePayJourneys;
 
 public interface Trips {
 
-    Long getTripDuration(Taps tapOn, Taps tapOff);
+    Long calculateTripDuration(Taps tapOn, Taps tapOff);
 
-    String getTripStatus();
+    String assignTripStatus();
 
-    Double getCharge(Taps tapOn, Taps tapOff);
+    Double calculateCharge(Taps tapOn, Taps tapOff);
 
     Long getDurationSecs();
 
@@ -15,7 +15,5 @@ public interface Trips {
     String getStatus();
 
     String toString();
-
-
 
 }
