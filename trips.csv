@@ -1,5 +1,5 @@
 Started, Finished, DurationSecs, FromStopId, ToStopId, ChargeAmount, CompanyId, BusID, PAN, Status
-2018-01-26 14:00:00.0, null, 0, Stop1, null, 7.3, Company2, Bus36, 2500005555555530, INCOMPLETE
+2018-01-26 14:00:00.0, 2018-01-26 17:00:00.0, 10800, Stop1, Stop3, 7.3, Company2, Bus36, 2500005555555530, COMPLETED
 2018-01-25 13:00:00.0, 2018-01-25 13:00:00.0, 0, Stop1, Stop1, 0.0, Company1, Bus37, 8800005555555580, CANCELLED
 2018-01-24 13:20:00.0, null, 0, Stop3, null, 7.3, Company2, Bus36, 2500005555555530, INCOMPLETE
 2018-01-23 13:00:00.0, null, 0, Stop2, null, 5.5, Company2, Bus36, 2500005555555530, INCOMPLETE

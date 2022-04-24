@@ -10,6 +10,7 @@ public class TripsProcessor {
 
     public static List<Trips> processTripsFromTaps(Map<LocalDate, List<Taps>> listOfTapsByDate) {
         List<Trips> processedTrips = new ArrayList<>();
+        //Process trips grouped by day
         listOfTapsByDate.forEach((k, v) -> processedTrips.addAll(processTripsPerDay(v)));
         return processedTrips;
     }
