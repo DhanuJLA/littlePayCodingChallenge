@@ -1,7 +1,7 @@
 package com.littlePayJourneys;
 
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.time.Duration;
 
 public abstract class AllTrips implements Trips{
     private Timestamp started;
@@ -12,6 +12,7 @@ public abstract class AllTrips implements Trips{
     private String busId;
     private String pan;
     private Double chargeAmount;
+    private Long durationSecs;
 
     public AllTrips (Taps tapOn, Taps tapOff){
         this.started = tapOn.getDateTimeUtc() != null ? Timestamp.valueOf(tapOn.getDateTimeUtc()) : null;
@@ -21,11 +22,21 @@ public abstract class AllTrips implements Trips{
         this.companyId = tapOn.getCompanyId();
         this.busId = tapOn.getBusId();
         this.pan = tapOn.getPan();
-        this.chargeAmount = getCharge(tapOn, tapOff);
+        this.chargeAmount = calculateCharge(tapOn, tapOff);
+        this.durationSecs = calculateTripDuration(tapOn, tapOff);
     }
 
     @Override
-    public Double getCharge(Taps tapOn, Taps tapOff){
+    public Long calculateTripDuration(Taps tapOn, Taps tapOff) {
+        Long duration = 0L;
+        if (tapOn.getDateTimeUtc() != null && tapOff.getDateTimeUtc() != null) {
+            duration = Duration.between(tapOn.getDateTimeUtc(), tapOff.getDateTimeUtc()).getSeconds();
+        }
+        return duration;
+    }
+
+    @Override
+    public Double calculateCharge(Taps tapOn, Taps tapOff){
 
         Double fare = 0.0;
 
@@ -86,6 +97,11 @@ public abstract class AllTrips implements Trips{
 
     public String getPan() {
         return pan;
+    }
+
+    @Override
+    public Long getDurationSecs() {
+        return durationSecs;
     }
 
     @Override
